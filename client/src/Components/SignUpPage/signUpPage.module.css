@@ -1,0 +1,43 @@
+.header__wrapper {
+    display: flex;
+    justify-content: center;
+    /* max-width: 500px; */
+    margin: 0 auto;
+    padding:15px 0;
+}
+.header_wrapper_logo {
+    display: flex;
+    align-items: center;
+    padding-right: 350px;
+}
+.header_wrapper_logo img {
+    max-width: 200px;
+    
+}
+.header_middle_wrapper  ul{
+    display: flex;
+    list-style: none;
+}
+.header_middle_wrapper ul li {
+    margin-right: 30px;
+}
+.header_middle_wrapper li span {
+    color: black;
+    text-decoration: none;
+}
+.header_signin_wrapper {
+    display: flex;
+    align-items: center;
+   
+}
+.header_signin_wrapper button {
+    width: 200px;
+    height: 40px;
+    background-color: rgb(81,108,240);
+    border-radius: 5px;
+    border: 2px solid rgb(81,108,240);
+    text-align: center;
+}
+.header_signin_wrapper button p{
+    color: white;
+}

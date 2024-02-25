@@ -14,11 +14,10 @@ function authMiddleware(req, res, next) {
   console.log("Received token:", token);
 
   try {
-    // Verify the token using the JWT secret key
     const decodedToken = jwt.verify(token, JWT_SECRET);
     console.log("Decoded token:", decodedToken);
-    const { username, userid } = decodedToken;
-    req.user = { username, userid };
+    const { username, usersid } = decodedToken; // Changed `userid` to `usersid`
+    req.user = { username, usersid };
     console.log("Authenticated user:", req.user);
     next();
   } catch (error) {

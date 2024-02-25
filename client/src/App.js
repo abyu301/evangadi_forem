@@ -1,9 +1,9 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import Home from './pages/Home';
 import Login from './pages/Login';
+import SignUpPage from './Components/SignUpPage/SignUpPage';
 import Register from './pages/Register';
 import axios from './API/axiosConfig';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react'
 
 
 export const AppState = createContext() ;
@@ -36,7 +36,7 @@ function App() {
   return (
     <AppState.Provider value={{ user, setuser}}>
       <Routes>
-        <Route path='/' element = {<Home />} /> 
+        <Route path='/' element = {<SignUpPage />} /> 
         <Route path='/login' element = {<Login />} />
         <Route path='/register' element = {<Register />} />
       </Routes>

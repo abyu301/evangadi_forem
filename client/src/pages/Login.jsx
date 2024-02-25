@@ -27,7 +27,7 @@ function Login() {
         });
         alert("User login successfully.");
         localStorage.setItem("token", data.token);
-        // naviget('/');
+        naviget('/');
         console.log(data)
   
       } catch (error) {
