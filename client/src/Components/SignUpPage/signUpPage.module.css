@@ -1,3 +1,4 @@
+/* header__wrapper */
 .header__wrapper {
     display: flex;
     justify-content: center;
@@ -40,4 +41,55 @@
 }
 .header_signin_wrapper button p{
     color: white;
+}
+/* detail__wrapper */
+.detail__wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding:15px 0;
+    background-color: rgb(245,245,245);
+    background-image:url('../../../assets//background-color.svg') ;
+    background-size: cover;
+    background-position: center;
+}
+.detail__wrapper div {
+    flex: 1;
+    margin: 0 30px;
+}
+/* footer */
+.footer__wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding:15px 0;
+    background-color: rgb(59,69,90);
+}
+.footer_wrapper_logo {
+    display: flex;
+    align-items: center;
+    padding-right: 350px;
+}
+.footer_wrapper_logo img {
+    max-width: 200px;
+}
+.footer_icons_logo ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 150px;
+    color: white;
+}
+.footer_icons_logo ul li {
+    list-style: none;
+}
+.footer_links {
+    color: white;
+}
+.footer_links ul li{
+    list-style: none;
+    /* color: white; */
+}
+.footer_contact {
+    color:white;
 }

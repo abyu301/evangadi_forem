@@ -1,6 +1,7 @@
 import {  useRef } from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import axios from '../API/axiosConfig.js'
+import axios from '../../API/axiosConfig.js'
+import classes from './Login.module.css'
 
 
 
@@ -37,24 +38,28 @@ function Login() {
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <div>
-        <span>email :---</span>
-        <input  ref={emailDom} 
-                type="text" 
-                placeholder='email'/>
-        </div>
-        <br />
-        <div>
-          <span>Password :---</span>
-          <input  ref={passwordDom} 
-                  type="password" placeholder='password'/>
-        </div>
-        <br />
-        <button type='submit'>Login</button>
-      </form>
-      <Link to={"/register"}>Register</Link>
+    <section className={classes.login__wrapper}>
+      <div className={classes.login_page_wrapper}>
+        <h2>Login to your account</h2>
+        <p>Don't have an account? <Link to={"/register"}>Create a new account</Link></p>
+        <form onSubmit={handleSubmit}>
+          <div className={classes.login_input_wrapper}>  
+            <input  ref={emailDom} 
+                    type="text" 
+                    placeholder='Your Email'/>
+          </div>
+          <br />
+          <div className={classes.login_input_wrapper}>
+            <input  ref={passwordDom} 
+                    type="password" placeholder='Your Password'/>
+          </div>
+          <br />
+          <div className={classes.login_login_wrapper}>
+          <button type='submit'>Login</button>
+          </div>
+        </form>
+        <Link to={"/register"}>Create an account?</Link>
+      </div>
     </section>
   )
 }

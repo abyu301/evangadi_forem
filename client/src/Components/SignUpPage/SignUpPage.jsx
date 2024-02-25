@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './signUpPage.module.css'
 import { Link } from 'react-router-dom'
-import Login from '../../pages/Login'
+import Login from '../../pages/Login/Login'
 // img
 import logo from './img/logo.png'
 import footer_logo from './img/logo-footer.png'
@@ -31,7 +31,7 @@ function SignUpPage() {
                 </button>
             </div>
         </section>
-        <section>
+        <section className={classes.detail__wrapper}>
             <div>
                 <Login />
             </div>
@@ -54,12 +54,12 @@ function SignUpPage() {
                 </div>
             </div>
         </section>
-        <section>
+        <section className={classes.footer__wrapper}>
             <div>
-                <div>
+                <div className={classes.footer_wrapper_logo}>
                 <Link to="/"><img src={footer_logo} alt="" /></Link> 
                 </div>
-                <div style={{backgroundColor: blue}}>
+                <div className={classes.footer_icons_logo}>
                     <ul>
                         <li><FacebookIcon/></li>
                         <li><InstagramIcon/></li>
@@ -67,19 +67,18 @@ function SignUpPage() {
                     </ul>
                 </div>
             </div>
-            <div >
-            <div className={classes.usefulLinkContainer}>
+            <div className={classes.footer_links}>
+                <div>
                     <h1>Useful Link</h1>
                 </div>
-                <div>
-                    <ul>
-                        <li><Link to="/">How it works</Link></li>
-                        <li><Link to="/">Terms of Service</Link></li>
-                        <li><Link to="/">Privacy policy</Link></li>
-                    </ul>
-                </div>
+                <ul>
+                    <li><Link to="/">How it works</Link></li>
+                    <li><Link to="/">Terms of Service</Link></li>
+                    <li><Link to="/">Privacy policy</Link></li>
+                </ul>
             </div>
-            <div>
+            <div className={classes.footer_contact}>
+                <h1>Contact info</h1>
                 <p>Evangadi Networks</p>
                 <p>support@evangadi.com</p>
                 <p>+1-202-386-2702</p>

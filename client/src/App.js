@@ -1,5 +1,5 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import SignUpPage from './Components/SignUpPage/SignUpPage';
 import Register from './pages/Register';
 import axios from './API/axiosConfig';
