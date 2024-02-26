@@ -2,9 +2,11 @@
 .header__wrapper {
     display: flex;
     justify-content: center;
-    /* max-width: 500px; */
     margin: 0 auto;
     padding:15px 0;
+}
+.header_manubar {
+    display: flex;
 }
 .header_wrapper_logo {
     display: flex;
@@ -33,7 +35,7 @@
    
 }
 .header_signin_wrapper button {
-    width: 200px;
+    width: 170px;
     height: 40px;
     background-color: rgb(81,108,240);
     border-radius: 5px;
@@ -48,12 +50,14 @@
     color: white;
     text-decoration: none;
 }
+
+
 /* detail__wrapper */
 .detail__wrapper {
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    padding:55px 0;
+    padding:40px 0;
     background-color: rgb(245,245,245);
     background-image:url('../../../assets//background-color.svg') ;
     background-size: cover;
@@ -63,39 +67,83 @@
     flex: 1;
     margin: 0 10px;
 }
+.howitwork__wrapper button {
+    width: 200px;
+    height: 40px;
+    background-color: rgb(254,131,3);
+    border-radius: 5px;
+    border: 2px solid rgb(254,131,3);;
+}
+.howitwork__wrapper a {
+    color: white;
+    text-decoration: none;
+}
 /* footer */
 .footer__wrapper {
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    padding:15px 0;
+    padding:60px 0;
     background-color: rgb(59,69,90);
+    height: 150px;
+}
+.footer__wrapper div {
+    /* flex: 1; */
+    margin: 0 40px;
 }
 .footer_wrapper_logo {
     display: flex;
     align-items: center;
-    padding-right: 350px;
 }
 .footer_wrapper_logo img {
     max-width: 200px;
 }
 .footer_icons_logo ul{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     max-width: 150px;
     color: white;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 .footer_icons_logo ul li {
-    list-style: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
 }
-.footer_links {
+.icon_circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    text-align: center;
+    line-height: 50px;
+}
+.icon_circle:hover {
+    background-color: aliceblue;
+    color:rgb(59,69,90) ;
+    transform: scale(1.1);
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+.footer_usefullinks {
     color: white;
+    margin-right: 0;
 }
-.footer_links ul li{
+.footer_usefullinks ul li{
     list-style: none;
-    /* color: white; */
+}
+.footer_usefullinks ul li a {
+    text-decoration: none;
+    color:rgb(136,154,156);
+    padding-bottom: 5px;
 }
 .footer_contact {
     color:white;
+}
+.footer_contact p {
+    color:rgb(136,154,156);
 }

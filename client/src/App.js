@@ -4,6 +4,7 @@ import SignUpPage from './Components/SignUpPage/SignUpPage';
 import Register from './pages/Register';
 import axios from './API/axiosConfig';
 import { createContext, useEffect, useState } from 'react'
+import './App.css';
 
 
 export const AppState = createContext() ;
