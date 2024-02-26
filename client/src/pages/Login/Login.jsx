@@ -53,12 +53,11 @@ function Login() {
             <input  ref={passwordDom} 
                     type="password" placeholder='Your Password'/>
           </div>
-          <br />
           <div className={classes.login_login_wrapper}>
           <button type='submit'>Login</button>
           </div>
         </form>
-        <Link to={"/register"}>Create an account?</Link>
+        <Link to={"/register"}>Forgot Password?</Link>
       </div>
     </section>
   )
