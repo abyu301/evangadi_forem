@@ -28,7 +28,7 @@ async function register(req, res) {
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: "User already exists" });
     }
-    if (password.length <= 8) {
+    if (password.length <= 7) {
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: "Password must be at least 8 characters" });

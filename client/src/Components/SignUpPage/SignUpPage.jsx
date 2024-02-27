@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classes from './signUpPage.module.css'
 import { Link } from 'react-router-dom'
 import Login from '../../pages/Login/Login'
@@ -9,15 +9,26 @@ import footer_logo from './img/logo-footer.png'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import CodeIcon from '@mui/icons-material/Code';
+import BuildIcon from '@mui/icons-material/Build';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 function SignUpPage() {
+    const [menuOpen, setMenuOpen] = useState(false)
+
+    const toggleMenu = () => {
+        // console.log("first")
+        setMenuOpen(!menuOpen)
+    }
   return (
     <section>
         <section className={classes.header__wrapper}>
             <div className={classes.header_wrapper_logo}>
                 <Link to="/"><img src={logo} alt="" /></Link> 
             </div>
+            {/* {menuOpen && ( */}
             <div className={classes.header_manubar}>
                 <div className={classes.header_middle_wrapper}>
                     <ul>
@@ -30,7 +41,13 @@ function SignUpPage() {
                         <Link to="/signin"><p>SIGN IN</p></Link>
                     </button>
                 </div>
-            </div>
+                </div>
+            {/* )} */}
+            <div className={classes.menuIcon}>
+            <button onClick={toggleMenu}>
+                <span><MenuIcon /></span>
+            </button>
+        </div>
         </section>
         <section className={classes.detail__wrapper}>
             <div>
@@ -45,16 +62,10 @@ function SignUpPage() {
                 </div>
                 <div>
                     <p>
-                    Welcome to Evangadi Tech Q&A, where the worlds of software development, AI, and technology converge to ignite your innovation journey. 
+                    Welcome to Evangadi Tech Q&A, your gateway to software development, AI, and technology. Join our vibrant community for insightful discussions, expert guidance, and career insights. 
                     </p>
                     <p>
-                    No matter what stage of life you are in, whether you're just starting elementary school or being promoted to CEO of a Fortune 500 company, you have much to offer to those who are trying to follow in your footsteps.!
-                    Wheather you are willing to share your knowledge or you are just looking to meet mentors of your own, please start by joining the network here.
-                    Whether you're a seasoned coding pro or venturing into the realms of artificial intelligence, our vibrant community provides a space for meaningful discussions, expert guidance, and invaluable career insights.
-                    Join us to share your expertise, connect with industry pioneers, and stay at the forefront of technological evolution. 
-                    </p>
-                    <p>
-                    No matter your stage in life, whether you're starting elementary school or climbing the corporate ladder, your knowledge and experience are valuable. Whether you're eager to share your wisdom or seeking mentorship, start your journey by joining our network today.
+                    Evangadi Networks welcomes all – from beginners to seasoned professionals. Share knowledge, connect, and grow with us today.
                     </p>
                 </div>
                 <div className={classes.howitwork__wrapper}>
@@ -94,6 +105,7 @@ function SignUpPage() {
                 <p>+1-202-386-2702</p>
             </div>
         </section>
+        <h4 className={classes.footer_abyu}> Developed <p><BuildIcon/></p> By <p><ArrowForwardIcon/></p>Abyu Ezezew <p><CodeIcon/></p></h4>
     </section>
   )
 }
