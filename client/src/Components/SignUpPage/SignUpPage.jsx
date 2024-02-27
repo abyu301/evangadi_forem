@@ -58,7 +58,8 @@ function SignUpPage() {
                     </div>
                 </div>
             </section>
-        <section className={classes.detail__wrapper}>
+            <section className={`${classes.detail__wrapper} ${classes.parentClass}`}>
+
             <div>
                 <Login />
             </div>
