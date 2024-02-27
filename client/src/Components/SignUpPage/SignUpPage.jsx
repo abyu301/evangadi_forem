@@ -13,42 +13,51 @@ import CodeIcon from '@mui/icons-material/Code';
 import BuildIcon from '@mui/icons-material/Build';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import MenuIcon from '@mui/icons-material/Menu';
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 function SignUpPage() {
-    const [menuOpen, setMenuOpen] = useState(false)
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
-        // console.log("first")
-        setMenuOpen(!menuOpen)
-    }
-  return (
-    <section>
-        <section className={classes.header__wrapper}>
-            <div className={classes.header_wrapper_logo}>
-                <Link to="/"><img src={logo} alt="" /></Link> 
-            </div>
-            {/* {menuOpen && ( */}
-            <div className={classes.header_manubar}>
-                <div className={classes.header_middle_wrapper}>
-                    <ul>
-                        <li><Link to="/"><span>Home</span></Link></li>
-                        <li><Link to="/"><span>How it Works</span></Link></li>
-                    </ul>
+        setMenuOpen(!menuOpen);
+    };
+    const closeMenu = () => {
+        setMenuOpen(false);
+    };
+
+    return (
+        <section>
+            <section className={classes.header__wrapper}>
+                <div className={classes.header_wrapper_logo}>
+                    <Link to="/"><img src={logo} alt="" /></Link>
                 </div>
-                <div className={classes.header_signin_wrapper}>
-                    <button>
-                        <Link to="/signin"><p>SIGN IN</p></Link>
+                <div className={`${classes.menuIcon} ${menuOpen ? classes.open : ''}`}>
+                    <button onClick={toggleMenu}>
+                        <span><MenuIcon /></span>
                     </button>
+                    <div className={classes.dropdown_content} style={{ display: menuOpen ? 'block' : 'none' }}
+                    >
+                        <Link to="/"><ClearIcon onClick={closeMenu}/></Link>
+                        <Link to="/">Home</Link>
+                        <Link to="/">How it Works</Link>
+                        <Link to="/signin"><button>SIGN IN</button></Link>
+                    </div>
                 </div>
+                <div className={classes.header_manubar}>
+                    <div className={classes.header_middle_wrapper}>
+                        <ul>
+                            <li><Link to="/"><span>Home</span></Link></li>
+                            <li><Link to="/"><span>How it Works</span></Link></li>
+                        </ul>
+                    </div>
+                    <div className={classes.header_signin_wrapper}>
+                        <button>
+                            <Link to="/signin"><p>SIGN IN</p></Link>
+                        </button>
+                    </div>
                 </div>
-            {/* )} */}
-            <div className={classes.menuIcon}>
-            <button onClick={toggleMenu}>
-                <span><MenuIcon /></span>
-            </button>
-        </div>
-        </section>
+            </section>
         <section className={classes.detail__wrapper}>
             <div>
                 <Login />
