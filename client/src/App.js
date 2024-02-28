@@ -34,9 +34,9 @@ function App() {
   return (
     <AppState.Provider value={{ user, setuser }}>
       <Routes>
-        <Route path="/signin" element={<SignInPage />} />
+        {/* <Route path="/signin" element={<SignInPage />} /> */}
         <Route path="/login" element={<SignUpPage />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<SignInPage />} />
       </Routes>
     </AppState.Provider>
   );

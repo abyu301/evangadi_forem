@@ -41,7 +41,7 @@ function SignUpPage() {
                         <Link to="/"><ClearIcon onClick={closeMenu}/></Link>
                         <Link to="/">Home</Link>
                         <Link to="/">How it Works</Link>
-                        <Link to="/signin"><button>SIGN IN</button></Link>
+                        <Link to="/register"><button>SIGN IN</button></Link>
                     </div>
                 </div>
                 <div className={classes.header_manubar}>
@@ -53,7 +53,7 @@ function SignUpPage() {
                     </div>
                     <div className={classes.header_signin_wrapper}>
                         <button>
-                            <Link to="/signin"><p>SIGN IN</p></Link>
+                            <Link to="/register"><p>SIGN IN</p></Link>
                         </button>
                     </div>
                 </div>
@@ -71,11 +71,11 @@ function SignUpPage() {
                     <h2>Evangadi Networks Q&A</h2>
                 </div>
                 <div>
-                    <p>
-                    Welcome to Evangadi Tech Q&A, your gateway to software development, AI, and technology. Join our vibrant community for insightful discussions, expert guidance, and career insights. 
+                <p>
+                    Welcome to Evangadi Tech Q&A, No matter what stage of life you are in, whether you’re just starting elementary school or being promoted to CEO of a Fortune 500 company, you have much to offer to those who are trying to follow in your footsteps. 
                     </p>
                     <p>
-                    Evangadi Networks welcomes all – from beginners to seasoned professionals. Share knowledge, connect, and grow with us today.
+                    Wheather you are willing to share your knowledge or you are just looking to meet mentors of your own, please start by joining the network here.
                     </p>
                 </div>
                 <div className={classes.howitwork__wrapper}>

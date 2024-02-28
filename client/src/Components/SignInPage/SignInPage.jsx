@@ -54,7 +54,7 @@ function SignUpPage() {
                     </div>
                     <div className={classes.header_signin_wrapper}>
                         <button>
-                            <Link to="/signin"><p>SIGN IN</p></Link>
+                            <Link to=""><p>SIGN IN</p></Link>
                         </button>
                     </div>
                 </div>
@@ -73,10 +73,10 @@ function SignUpPage() {
                 </div>
                 <div>
                     <p>
-                    Welcome to Evangadi Tech Q&A, your gateway to software development, AI, and technology. Join our vibrant community for insightful discussions, expert guidance, and career insights. 
+                    Welcome to Evangadi Tech Q&A, No matter what stage of life you are in, whether you’re just starting elementary school or being promoted to CEO of a Fortune 500 company, you have much to offer to those who are trying to follow in your footsteps. 
                     </p>
                     <p>
-                    Evangadi Networks welcomes all – from beginners to seasoned professionals. Share knowledge, connect, and grow with us today.
+                    Wheather you are willing to share your knowledge or you are just looking to meet mentors of your own, please start by joining the network here.
                     </p>
                 </div>
                 <div className={classes.howitwork__wrapper}>
@@ -116,7 +116,7 @@ function SignUpPage() {
                 <p>+1-202-386-2702</p>
             </div>
         </section>
-        <h4 className={classes.footer_abyu}> Developed <p><BuildIcon/></p> By <p><ArrowForwardIcon/></p>Abyu Ezezew <p><CodeIcon/></p></h4>
+        {/* <h4 className={classes.footer_abyu}> Developed <p><BuildIcon/></p> By <p><ArrowForwardIcon/></p>Abyu Ezezew <p><CodeIcon/></p></h4> */}
     </section>
   )
 }

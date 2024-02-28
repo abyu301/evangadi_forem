@@ -1,11 +1,19 @@
-import {  useRef } from 'react'
+import {  useRef, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import axios from '../../API/axiosConfig.js'
 import classes from './Login.module.css'
+import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 
 
 function Login() {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   const naviget = useNavigate()
   const emailDom = useRef(null)
   const passwordDom = useRef(null)
@@ -50,8 +58,16 @@ function Login() {
           </div>
           <br />
           <div className={classes.login_input_wrapper}>
-            <input  ref={passwordDom} 
-                    type="password" placeholder='Your Password'/>
+              <input
+                  ref={passwordDom}
+                  type={passwordVisible ? 'text' : 'password'}
+                  placeholder='Password'
+              />
+                  <InputAdornment position="start">
+                      <IconButton onClick={togglePasswordVisibility} edge="end" className={`${classes.visibilityIcon}`}>
+                          {passwordVisible ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
           </div>
           <div className={classes.login_login_wrapper}>
           <button type='submit'>Login</button>

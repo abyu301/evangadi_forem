@@ -32,6 +32,12 @@
     padding-left: 10px;
     width: 100%;
 }
+.visibilityIcon {
+    display: flex;
+    left: 90%; 
+    top: -20px;
+    transform: translateY(-50%);
+}
 .login_login_wrapper {
     display: flex;
     align-items: center;
