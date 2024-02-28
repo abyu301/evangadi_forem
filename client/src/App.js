@@ -2,6 +2,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import SignUpPage from "./Components/SignUpPage/SignUpPage";
 import SignInPage from "./Components/SignInPage/SignInPage";
 import Register from "./pages/Register/Register";
+import Home from "./pages/Home/Home";
 import axios from "./API/axiosConfig";
 import { createContext, useEffect, useState } from "react";
 import "./App.css";
@@ -34,7 +35,7 @@ function App() {
   return (
     <AppState.Provider value={{ user, setuser }}>
       <Routes>
-        {/* <Route path="/signin" element={<SignInPage />} /> */}
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<SignUpPage />} />
         <Route path="/register" element={<SignInPage />} />
       </Routes>

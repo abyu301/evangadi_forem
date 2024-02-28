@@ -1,5 +1,5 @@
 import React,{useContext} from 'react'
-import { AppState } from '../App'
+import { AppState } from '../../App'
 
 function Home() {
   const { user } = useContext(AppState);
