@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import axios from '../API/axiosConfig.js'
+import axios from '../../API/axiosConfig.js'
+import classes from './Register.module.css'
 
 function Register() {
  const naviget = useNavigate()
@@ -48,45 +49,55 @@ function Register() {
 
 
   return (
-    <section>
+    <section className={classes.register_wraper}>
+      <div className={classes.Register_page_wraper}>
       <form onSubmit={handleSubmit}>
+      <div className={classes.register_input_wraper}>
         <div>
-          <span>username :---</span>
           <input ref={userNameDom} 
                   type="text" 
-                  placeholder='username'/>
+                  placeholder='User Name'/>
         </div>
         <br />
         <div>
-        <span>First name :---</span>
         <input  ref={firstNameDom} 
                 type="text" 
-                placeholder='first name'/>
+                placeholder='First Name'/>
         </div>
         <br />
         <div>
-        <span>Last name :---</span>
         <input  ref={lastNameDom} 
                 type="text" 
-                placeholder='last name'/>
+                placeholder='Last Name'/>
         </div>
         <br />
         <div>
-        <span>email :---</span>
         <input  ref={emailDom} 
                 type="text" 
-                placeholder='email'/>
+                placeholder='Email'/>
         </div>
         <br />
         <div>
-          <span>Password :---</span>
           <input  ref={passwordDom} 
-                  type="password" placeholder='password'/>
+                  type="password" placeholder='Password'/>
         </div>
         <br />
-        <button type='submit'>Register</button>
+        <div className={classes.register_submit_wraper}>
+          <button type='submit'>Agree and join</button>
+        </div>
+      </div>
       </form>
-      <Link to={"/login"}>login</Link>
+      <div className={classes.register_terms_wraper}>
+        <p>
+          i Agree to the <span>Privacy Policy</span> and <span>Term of Service</span>
+        </p>
+        <div>
+          <span>
+          <Link to={"/login"}>Already have an account?</Link>
+          </span>
+        </div>
+      </div>
+      </div>
     </section>
   )
 }
