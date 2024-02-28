@@ -1,9 +1,17 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import axios from '../../API/axiosConfig.js'
 import classes from './Register.module.css'
+import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 function Register() {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
  const naviget = useNavigate()
  const userNameDom = useRef(null)
  const firstNameDom = useRef(null)
@@ -51,49 +59,65 @@ function Register() {
   return (
     <section className={classes.register_wraper}>
       <div className={classes.Register_page_wraper}>
-      <form onSubmit={handleSubmit}>
-      <div className={classes.register_input_wraper}>
-        <div>
-          <input ref={userNameDom} 
-                  type="text" 
-                  placeholder='User Name'/>
-        </div>
-        <br />
-        <div>
-        <input  ref={firstNameDom} 
-                type="text" 
-                placeholder='First Name'/>
-        </div>
-        <br />
-        <div>
-        <input  ref={lastNameDom} 
-                type="text" 
-                placeholder='Last Name'/>
-        </div>
-        <br />
-        <div>
-        <input  ref={emailDom} 
-                type="text" 
-                placeholder='Email'/>
-        </div>
-        <br />
-        <div>
-          <input  ref={passwordDom} 
-                  type="password" placeholder='Password'/>
-        </div>
-        <br />
-        <div className={classes.register_submit_wraper}>
-          <button type='submit'>Agree and join</button>
-        </div>
-      </div>
-      </form>
-      <div className={classes.register_terms_wraper}>
-        <p>
-          i Agree to the <span>Privacy Policy</span> and <span>Term of Service</span>
-        </p>
-        <div>
+          <div>
+            <h2>Join the Evangadi Network</h2>
+            <p>Already have an account? <Link to={"/login"}>Sign in</Link></p>
+          </div>
+          <form onSubmit={handleSubmit}>
+              <div className={classes.register_input_wraper}>
+                <div>
+                  <input ref={userNameDom} 
+                          type="text" 
+                          placeholder='User Name'/>
+                </div>
+                <br />
+                <div className={classes.register_input_name_wraper}>
+                <input  ref={firstNameDom} 
+                        type="text" 
+                        placeholder='First Name'/>
+                
+                <input  ref={lastNameDom} 
+                        type="text" 
+                        placeholder='Last Name'/>
+                </div>
+                <br />
+                <div>
+                <input  ref={emailDom} 
+                        type="text" 
+                        placeholder='Email'/>
+                </div>
+                <br />
+                <div className={classes.password_input}>
+                <div className={classes.password_input_wrapper}>
+  <input
+    ref={passwordDom}
+    type={passwordVisible ? 'text' : 'password'}
+    placeholder='Password'
+  />
+  <InputAdornment position="start">
+    <IconButton onClick={togglePasswordVisibility} edge="end" className={`${classes.visibilityIcon}`}>
+      {passwordVisible ? <Visibility /> : <VisibilityOff />}
+    </IconButton>
+  </InputAdornment>
+</div>
+
+</div>
+
+                <br />
+                <div className={classes.register_last_wraper}>
+                <p>
+                  I Agree to the <Link to={"/"}>Privacy Policy</Link> and <Link to={"/"}>Term of Service</Link>
+                </p>
+                </div>
+                <div className={classes.register_submit_wraper}>
+                  <button type='submit'>Agree and join</button>
+                </div>
+              </div>
+          </form>
+      <div>
+        <div className={classes.register_last_wraper}>
           <span>
-          <Link to={"/login"}>Already have an account?</Link>
+          <Link to={"/login"}><h4>Already have an account?</h4> </Link>
           </span>
         </div>
       </div>
