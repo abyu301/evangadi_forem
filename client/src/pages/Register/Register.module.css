@@ -36,21 +36,11 @@
 .register_input_wraper input::placeholder {
     padding-left: 25px;
 }
-/* .visibilityIcon {
-    color: aqua;
-    margin-right: 100px;
-    position: fixed; 
-    left:15px;
-    top:150%;
-    padding-left: 50px;
-    padding-right: 400px;
-} */
 .visibilityIcon {
     left: 90%; 
     top: 50%;
     transform: translateY(-50%);
 }
-
 .register_submit_wraper {
     display: flex;
     justify-content: center;

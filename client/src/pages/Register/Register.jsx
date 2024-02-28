@@ -88,20 +88,18 @@ function Register() {
                 </div>
                 <br />
                 <div className={classes.password_input}>
-                <div className={classes.password_input_wrapper}>
-  <input
-    ref={passwordDom}
-    type={passwordVisible ? 'text' : 'password'}
-    placeholder='Password'
-  />
-  <InputAdornment position="start">
-    <IconButton onClick={togglePasswordVisibility} edge="end" className={`${classes.visibilityIcon}`}>
-      {passwordVisible ? <Visibility /> : <VisibilityOff />}
-    </IconButton>
-  </InputAdornment>
-</div>
+                      <input
+                        ref={passwordDom}
+                        type={passwordVisible ? 'text' : 'password'}
+                        placeholder='Password'
+                      />
+                      <InputAdornment position="start">
+                        <IconButton onClick={togglePasswordVisibility} edge="end" className={`${classes.visibilityIcon}`}>
+                          {passwordVisible ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
 
-</div>
+                </div>
 
                 <br />
                 <div className={classes.register_last_wraper}>
