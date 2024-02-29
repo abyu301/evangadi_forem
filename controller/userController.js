@@ -61,7 +61,7 @@ async function login(req, res) {
 
   try {
     const [user] = await dbConnection.query(
-      "SELECT username, usersid, password FROM users WHERE email = ?",
+      "SELECT username,firstname, usersid, password FROM users WHERE email = ?",
       [email]
     );
 
@@ -74,14 +74,14 @@ async function login(req, res) {
         .json({ msg: "Invalid credentials" });
     }
 
-    const { username, usersid } = user[0];
+    const { username, firstname, usersid } = user[0];
     const token = jwt.sign({ username, usersid }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
 
     return res
       .status(StatusCodes.OK)
-      .json({ msg: "User login successful", token, username });
+      .json({ msg: "User login successful", token, username, firstname });
   } catch (error) {
     console.error(error.message);
     return res

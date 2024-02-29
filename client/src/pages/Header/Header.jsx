@@ -42,7 +42,7 @@ function Header() {
                     </div>
                     <div className={classes.header_signin_wrapper}>
                         <button>
-                            <Link to=""><p>SIGN IN</p></Link>
+                            <Link to="/login"><p>SIGN IN</p></Link>
                         </button>
                     </div>
                 </div>
