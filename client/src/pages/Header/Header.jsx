@@ -30,7 +30,7 @@ function Header() {
                         <Link to=""><ClearIcon onClick={closeMenu}/></Link>
                         <Link to="/">Home</Link>
                         <Link to="/">How it Works</Link>
-                        <Link to="/signin"><button>SIGN IN</button></Link>
+                        <Link to="/signin"><button>SIGN OUT</button></Link>
                     </div>
                 </div>
                 <div className={classes.header_manubar}>
@@ -42,7 +42,7 @@ function Header() {
                     </div>
                     <div className={classes.header_signin_wrapper}>
                         <button>
-                            <Link to="/login"><p>SIGN IN</p></Link>
+                            <Link to="/login"><p>SIGN OUT</p></Link>
                         </button>
                     </div>
                 </div>

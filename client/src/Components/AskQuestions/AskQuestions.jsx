@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Footer from '../../pages/Footer/Footer';
+import Header from '../../pages/Header/Header';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -29,35 +30,7 @@ function AskQuestions() {
   return (
     <section>
       <div>
-        <section className={classes.header__wrapper}>
-          <div className={classes.header_wrapper_logo}>
-            <Link to="/"><img src={logo} alt="" /></Link>
-          </div>
-          <div className={`${classes.menuIcon} ${menuOpen ? classes.open : ''}`}>
-            <button onClick={toggleMenu}>
-              <span><MenuIcon /></span>
-            </button>
-            <div className={classes.dropdown_content} style={{ display: menuOpen ? 'block' : 'none' }}>
-              <Link to=""><ClearIcon onClick={closeMenu}/></Link>
-              <Link to="/">Home</Link>
-              <Link to="/">How it Works</Link>
-              <Link to="/signin"><button>Log out</button></Link>
-            </div>
-          </div>
-          <div className={classes.header_manubar}>
-            <div className={classes.header_middle_wrapper}>
-              <ul>
-                <li><Link to="/"><span>Home</span></Link></li>
-                <li><Link to="/"><span>How it Works</span></Link></li>
-              </ul>
-            </div>
-            <div className={classes.header_signin_wrapper}>
-              <button>
-                <Link to="/login"><p>LOG OUT</p></Link>
-              </button>
-            </div>
-          </div>
-        </section>
+        <Header />
       </div>
       <hr className={classes.hr} />
       
@@ -85,8 +58,9 @@ function AskQuestions() {
               
             />
         </div>
-        
-        <button className={classes.publicQuestion_button_wrapper}>Submit</button>
+          <Link to="/">
+          <button className={classes.publicQuestion_button_wrapper}>Post Your Question</button>
+          </Link>
       </div>
       <Footer />
     </section>
