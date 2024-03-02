@@ -8,7 +8,7 @@ import Footer from '../../pages/Footer/Footer';
 
 function Home() {
   const { user } = useContext(AppState);
-  const [firstName, setFirstName] = useState('');
+  const [firstName, setFirstName] = useState(' ');
   const searchDom = useRef(null);
 
   useEffect(() => {

@@ -1,48 +1,53 @@
-import {  useRef, useState } from 'react'
-import { Link, useNavigate } from "react-router-dom"
-import axios from '../../API/axiosConfig.js'
-import classes from './Login.module.css'
-import { IconButton, InputAdornment, TextField } from '@mui/material';
+import React, { useContext, useRef, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import axios from '../../API/axiosConfig.js';
+import classes from './Login.module.css';
+import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-
-
+import { AppState } from '../../App';
 
 function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const { setUser } = useContext(AppState);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const naviget = useNavigate()
-  const emailDom = useRef(null)
-  const passwordDom = useRef(null)
+  const navigate = useNavigate();
+  const emailDom = useRef(null);
+  const passwordDom = useRef(null);
 
   async function handleSubmit(e) {
     e.preventDefault();
     const emailValue = emailDom.current.value;
     const passwordValue = passwordDom.current.value;
   
-      if (
-        !emailValue || !passwordValue) {
-        alert("Please provide all required fields");
-        return;
-      }
+    if (!emailValue || !passwordValue) {
+      alert("Please provide all required fields");
+      return;
+    }
   
-      try {
-        const {data} = await axios.post('users/login', {
-          email: emailValue,
-          password: passwordValue,
-        });
-        alert("User login successfully.");
-        localStorage.setItem("token", data.token);
-        naviget('/');
-        console.log(data)
-  
-      } catch (error) {
+    try {
+      const response = await axios.post('users/login', {
+        email: emailValue,
+        password: passwordValue,
+      });
+      const userData = response.data;
+      alert("User login successfully.");
+      localStorage.setItem("token", userData.token);
+      setUser(userData);
+      navigate('/');
+      console.log(userData);
+    } catch (error) {
+      if (error?.response?.data?.msg) {
         alert(error?.response?.data?.msg);
         console.error(error.response.data.msg);
+      } else {
+        alert("An error occurred. Please try again later.");
+        console.log("An error occurred:", error.message);
       }
+    }
   }
 
   return (
@@ -52,31 +57,33 @@ function Login() {
         <p>Don't have an account? <Link to={"/register"}>Create a new account</Link></p>
         <form onSubmit={handleSubmit}>
           <div className={classes.login_input_wrapper}>  
-            <input  ref={emailDom} 
-                    type="text" 
-                    placeholder='Your Email'/>
+            <input  
+              ref={emailDom} 
+              type="text" 
+              placeholder='Your Email'
+            />
           </div>
           <br />
           <div className={classes.login_input_wrapper}>
-              <input
-                  ref={passwordDom}
-                  type={passwordVisible ? 'text' : 'password'}
-                  placeholder='Password'
-              />
-                  <InputAdornment position="start">
-                      <IconButton onClick={togglePasswordVisibility} edge="end" className={`${classes.visibilityIcon}`}>
-                          {passwordVisible ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
+            <input
+              ref={passwordDom}
+              type={passwordVisible ? 'text' : 'password'}
+              placeholder='Password'
+            />
+            <InputAdornment position="start">
+              <IconButton onClick={togglePasswordVisibility} edge="end" className={`${classes.visibilityIcon}`}>
+                {passwordVisible ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
           </div>
           <div className={classes.login_login_wrapper}>
-          <button type='submit'>Login</button>
+            <button type='submit'>Login</button>
           </div>
         </form>
         <Link to={"/register"}>Forgot Password?</Link>
       </div>
     </section>
-  )
+  );
 }
 
-export default Login
+export default Login;

@@ -90,10 +90,23 @@ async function login(req, res) {
   }
 }
 
+
+
 async function checkUser(req, res) {
-  const username = req.body.username;
-  const usersid = req.body.usersid;
-  res.status(StatusCodes.OK).json({ msg: "valid user", username, usersid });
+  try {
+    if (!req.body || !req.body.username || !req.body.usersid) {
+      return res.status(StatusCodes.BAD_REQUEST).json({ msg: "Invalid user data" });
+    }
+
+    const username = req.body.username;
+    const usersid = req.body.usersid;
+
+    res.status(StatusCodes.OK).json({ msg: "valid user", username, usersid });
+  } catch (error) {
+    console.error("Error occurred:", error.message);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: "Something went wrong, try again" });
+  }
 }
+
 
 module.exports = { register, login, checkUser };
