@@ -5,18 +5,13 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 async function register(req, res) {
-  const { username, firstname, lastname, email, password} = req.body;
+  const { username, firstname, lastname, email, password } = req.body;
 
-  if (
-    !username || 
-    !firstname || 
-    !lastname || 
-    !email || 
-    !password) {
+  if (!username || !firstname || !lastname || !email || !password) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ msg: "Please provide all required fields" });
-  } 
+  }
 
   try {
     const [user] = await dbConnection.query(
@@ -37,10 +32,12 @@ async function register(req, res) {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    await dbConnection.query(
+    let savedUser = await dbConnection.query(
       "INSERT INTO users (username, firstname, lastname, email, password) VALUES (?,?,?,?,?)",
       [username, firstname, lastname, email, hashedPassword]
     );
+    // console.log(savedUser[0]);
+
     return res.status(StatusCodes.CREATED).json({ msg: "User registered" });
   } catch (error) {
     console.error(error.message);
@@ -61,7 +58,7 @@ async function login(req, res) {
 
   try {
     const [user] = await dbConnection.query(
-      "SELECT username,firstname, usersid, password FROM users WHERE email = ?",
+      "SELECT username, firstname, usersid, email, password FROM users WHERE email = ?",
       [email]
     );
 
@@ -71,17 +68,22 @@ async function login(req, res) {
     ) {
       return res
         .status(StatusCodes.BAD_REQUEST)
-        .json({ msg: "Invalid credentials" });
+        .json({ msg: "Invalid Email OR Password" });
     }
 
+    console.log("User retrieved from database:", user[0]); // Log the user data retrieved from the database
+
     const { username, firstname, usersid } = user[0];
-    const token = jwt.sign({ username, usersid }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
+    const tokenPayload = { username, firstname, usersid, email }; 
+    const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, {
+      expiresIn: "3d",
     });
+
+    console.log("Token payload:", tokenPayload); // Log the token payload before sending the response
 
     return res
       .status(StatusCodes.OK)
-      .json({ msg: "User login successful", token, username, firstname });
+      .json({ msg: "User login successful", token, ...tokenPayload }); // Spread tokenPayload
   } catch (error) {
     console.error(error.message);
     return res
@@ -92,16 +94,23 @@ async function login(req, res) {
 
 
 
+
+
+
 async function checkUser(req, res) {
   try {
-    if (!req.body || !req.body.username || !req.body.usersid) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ msg: "Invalid user data" });
-    }
+    const decodedToken = req.user;
+    const { username, firstname, usersid, email, } = decodedToken;
 
-    const username = req.body.username;
-    const usersid = req.body.usersid;
 
-    res.status(StatusCodes.OK).json({ msg: "valid user", username, usersid });
+    // if (!req.body || !req.body.username || !req.body.usersid) {
+    //   return res.status(StatusCodes.BAD_REQUEST).json({ msg: "Invalid user data" });
+    // }
+
+    // const username = req.body.username;
+    // const usersid = req.body.usersid;
+
+    res.status(StatusCodes.OK).json({ msg: "valid user", username, firstname, usersid, email });
   } catch (error) {
     console.error("Error occurred:", error.message);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: "Something went wrong, try again" });

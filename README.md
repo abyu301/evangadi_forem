@@ -18,14 +18,16 @@ CREATE TABLE users (
 );
 
 CREATE TABLE questions (
-  title VARCHAR(50) NOT NULL,
-  description VARCHAR(200) NOT NULL,
-  tag VARCHAR(20),
-  PRIMARY KEY (id, questionid),
-  FOREIGN KEY (userid) REFERENCES users(userid)
-  PRIMARY KEY (id),
-  FOREIGN KEY (usersid) REFERENCES users(usersid)
+  questionid INT(20) NOT NULL AUTO_INCREMENT,
+  question VARCHAR(225) NOT NULL,
+  questiondescription VARCHAR(225),
+  questionCodeBlock VARCHAR(225),
+  tags VARCHAR(200),
+  usersid INT(20) NOT NULL,
+  PRIMARY KEY (questionid),
+  FOREIGN KEY (usersid) REFERENCES (usersid)
 );
+
 
 CREATE TABLE answers (
   answer VARCHAR(200) NOT NULL,

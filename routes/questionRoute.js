@@ -1,10 +1,11 @@
+// questionRoute.js
+
 const express = require("express");
-const router = express.Router();
+const Router = express.Router();
+const { postQuestion } = require("../controller/questionController");
+const authMiddleware = require("../middleware/authMiddleware");
 
+Router.get("/all-questions", authMiddleware, postQuestion);
+Router.post("/add-questions", authMiddleware, postQuestion);
 
-
-router.get("/all-questions", (req, res) => {
-    res.send("all questions");
-});
-
-module.exports = router;
+module.exports = Router;

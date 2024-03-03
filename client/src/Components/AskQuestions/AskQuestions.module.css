@@ -66,3 +66,9 @@
     background-color: rgb(254,131,3);
     border: 2px solid rgb(254,131,3);
 }
+.publicQuestion_wrapper a{
+    text-decoration: none;
+}
+.publicQuestion_wrapper a:hover {
+    color: rgb(254,131,3);
+}

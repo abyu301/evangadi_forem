@@ -11,13 +11,16 @@ function authMiddleware(req, res, next) {
     return res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Authentication invalid" });
   }
   const token = authHeader.split(" ")[1];
-  console.log("Received token:", token);
+  // console.log("Received token:", token);
 
   try {
     const decodedToken = jwt.verify(token, JWT_SECRET);
+    if (!decodedToken) {
+      return res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Authentication invalid, invalid Token" });
+    }
     console.log("Decoded token:", decodedToken);
-    const { username, usersid } = decodedToken; 
-    req.user = { username, usersid };
+    
+    req.user = decodedToken;
     console.log("Authenticated user:", req.user);
     next();
   } catch (error) {

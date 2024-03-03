@@ -37,8 +37,9 @@ function Login() {
       alert("User login successfully.");
       localStorage.setItem("token", userData.token);
       setUser(userData);
-      navigate('/');
       console.log(userData);
+      navigate('/');
+      
     } catch (error) {
       if (error?.response?.data?.msg) {
         alert(error?.response?.data?.msg);
@@ -47,6 +48,7 @@ function Login() {
         alert("An error occurred. Please try again later.");
         console.log("An error occurred:", error.message);
       }
+      
     }
   }
 

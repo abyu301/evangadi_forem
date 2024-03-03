@@ -23,7 +23,7 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 
 // questions routes middleware 
-app.use("/api/questions", authMiddleware, questionsRoutes);
+app.use("/api/questions", questionsRoutes);
 
 // answers routes middleware ??
 
