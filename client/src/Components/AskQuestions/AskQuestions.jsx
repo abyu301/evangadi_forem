@@ -11,10 +11,9 @@ import axios from '../../API/axiosConfig.js';
 
 function AskQuestions() {
   const [editorContent, setEditorContent] = useState('');
-  const { setUser, setQuestion } = useContext(AppState);
+  const { setUser } = useContext(AppState); // Remove setQuestion from here
   const navigate = useNavigate();
   const titleDom = useRef(null);
-  const descriptionDom = useRef(null);
 
   const handleEditorChange = (content) => {
     setEditorContent(content);
@@ -23,7 +22,6 @@ function AskQuestions() {
   async function postQuestionSubmit(e) {
     e.preventDefault();
     const titleValue = titleDom.current.value;
-    const descriptionValue = descriptionDom.current.value;
 
     if (!titleValue) {
       alert("Please provide your question");
@@ -32,17 +30,16 @@ function AskQuestions() {
 
     try {
       const response = await axios.post('/add-questions', {
-        title: titleValue,
-        description: descriptionValue,
+        question: titleValue,
+        questiondescription: editorContent,
       });
       const userData = response.data;
       alert("Question posted successfully.");
-
-      setUser(userData, userData.question);
-      console.log(userData, userData.question);
+      setUser(userData); // Assuming your setUser function expects only user data
       navigate('/');
     } catch (error) {
       console.log(error);
+      alert("Failed to post question. Please try again later.");
     }
   }
 
@@ -71,7 +68,6 @@ function AskQuestions() {
               value={editorContent} 
               onChange={handleEditorChange} 
               placeholder="Question Description..."
-              ref={descriptionDom} 
             />
           </div>
           <button type='submit' className={classes.publicQuestion_button_wrapper}>Post Your Question</button>
@@ -81,5 +77,6 @@ function AskQuestions() {
     </section>
   );
 }
+
 
 export default AskQuestions;

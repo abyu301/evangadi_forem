@@ -29,13 +29,17 @@ CREATE TABLE questions (
 );
 
 
-CREATE TABLE answers (
-  answer VARCHAR(200) NOT NULL,
+CREATE TABLE answerTable (
+  answerid INT(20) NOT NULL AUTO_INCREMENT,
+  answer VARCHAR(225) NOT NULL,
+  answerCodeBlock VARCHAR(225),
+  usersid INT(20) NOT NULL,
+  questionid INT(20) NOT NULL,
   PRIMARY KEY (answerid),
-  FOREIGN KEY (questionid) REFERENCES questions(questionid),
-  FOREIGN KEY (userid) REFERENCES users(userid)
-  FOREIGN KEY (usersid) REFERENCES users(usersid)
+  FOREIGN KEY (usersid) REFERENCES users(usersid),
+  FOREIGN KEY (questionid) REFERENCES questions(questionid)
 );
+
 
 <!-- Database User Account: Create a user account in your database and give access privileges to manage and access the database.-->
 

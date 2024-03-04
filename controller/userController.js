@@ -71,7 +71,7 @@ async function login(req, res) {
         .json({ msg: "Invalid Email OR Password" });
     }
 
-    console.log("User retrieved from database:", user[0]); // Log the user data retrieved from the database
+    console.log("User retrieved from database:", user[0]);
 
     const { username, firstname, usersid } = user[0];
     const tokenPayload = { username, firstname, usersid, email }; 
@@ -79,11 +79,11 @@ async function login(req, res) {
       expiresIn: "3d",
     });
 
-    console.log("Token payload:", tokenPayload); // Log the token payload before sending the response
+    console.log("Token payload:", tokenPayload); 
 
     return res
       .status(StatusCodes.OK)
-      .json({ msg: "User login successful", token, ...tokenPayload }); // Spread tokenPayload
+      .json({ msg: "User login successful", token, ...tokenPayload }); 
   } catch (error) {
     console.error(error.message);
     return res
