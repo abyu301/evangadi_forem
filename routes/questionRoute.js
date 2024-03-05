@@ -10,3 +10,4 @@ Router.post("/add-questions", authMiddleware, postQuestion);
 Router.get("/:questionid", authMiddleware, singleQuestion);
 
 module.exports = Router;
+

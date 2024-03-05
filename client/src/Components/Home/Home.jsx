@@ -1,21 +1,32 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppState } from '../../App';
 import classes from './Home.module.css';
-import { Link } from'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Header from '../../pages/Header/Header';
 import Footer from '../../pages/Footer/Footer';
 
 function Home() {
-  const { user } = useContext(AppState);
-  const [firstName, setFirstName] = useState(' ');
-  const searchDom = useRef(null);
+  const { user, questions } = useContext(AppState);
+  const [firstName, setFirstName] = useState('');
+  const [userQuestions, setUserQuestions] = useState([]);
+
 
   useEffect(() => {
     if (user) {
       setFirstName(user.firstname);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (questions) {
+      setUserQuestions(questions);
+    }
+  }, [questions]);
+
+  useEffect(() => {
+    console.log("userQuestions:", userQuestions);
+  }, [userQuestions]);
 
   return (
     <section>
@@ -33,7 +44,6 @@ function Home() {
           <div className={classes.search_input}>
             <input
               type="search"
-              ref={searchDom}
               placeholder="Search Questions"
             />
           </div>
@@ -43,9 +53,20 @@ function Home() {
         </div>
 
         <div>
-          <h2>Questions</h2>
+          <h2>Users</h2>
+          <div>Name: {user?.firstname}</div>
+          <div>Email: {user?.email}</div>
         </div>
-        <div>users and questions</div>
+
+        <div>
+          <h2>Questions</h2>
+          {userQuestions.map((question) => (
+            <div key={question.questionid}>
+              <h3>{question.question}</h3>
+              <p>{question.questiondescription}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div>

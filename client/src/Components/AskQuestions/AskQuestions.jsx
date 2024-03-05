@@ -11,43 +11,63 @@ import axios from '../../API/axiosConfig.js';
 
 function AskQuestions() {
   const [editorContent, setEditorContent] = useState('');
-  const { setUser } = useContext(AppState); // Remove setQuestion from here
+  const { questions, setQuestions } = useContext(AppState);
   const navigate = useNavigate();
-  const titleDom = useRef(null);
-
-  const handleEditorChange = (content) => {
-    setEditorContent(content);
-  };
+  const questionDom = useRef(null);
+  const questionDescriptionDom = useRef(null);
 
   async function postQuestionSubmit(e) {
     e.preventDefault();
-    const titleValue = titleDom.current.value;
+    const questionValue = questionDom.current.value;
+    const questionDescriptionValue = questionDescriptionDom.current.value;
 
-    if (!titleValue) {
+    console.log(questionValue)
+
+    if (!questionValue) {
       alert("Please provide your question");
       return;
     }
 
     try {
-      const response = await axios.post('/add-questions', {
-        question: titleValue,
-        questiondescription: editorContent,
-      });
-      const userData = response.data;
-      alert("Question posted successfully.");
-      setUser(userData); // Assuming your setUser function expects only user data
-      navigate('/');
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        'questions/add-questions',
+        {
+          question: questionValue,
+          questionDescription: questionDescriptionValue,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      console.log(response);
+      console.log("Response", response.data);
+
+      const responseData = response.data;
+
+      if (responseData) {
+        alert("Question posted successfully.");
+        
+        setQuestions(prevQuestions => [...prevQuestions, responseData]);
+        navigate('/');
+      } else {
+        console.error("Response data is undefined", response);
+        alert("Failed to post question. Please try again later.");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
       alert("Failed to post question. Please try again later.");
     }
   }
+  
+  
+  
 
   return (
     <section>
-      <div>
-        <Header />
-      </div>
+      <Header />
       <hr className={classes.hr} />
       <div className={classes.question_description}>
         <h2> <span><LightbulbIcon /></span>Steps to write a good question <span><LightbulbIcon /></span></h2>
@@ -61,13 +81,15 @@ function AskQuestions() {
       <div className={classes.publicQuestion_wrapper}>
         <h2>Ask a public question</h2>
         <Link to={"/"}><p>Go to Question Page</p></Link>
-        <input type="text" placeholder='Question Title' ref={titleDom} />
         <form onSubmit={postQuestionSubmit}>
+          <input type="text" placeholder='Question Title' ref={questionDom} />
           <div className={classes.reactQuill_wrapper}>
             <ReactQuill 
               value={editorContent} 
-              onChange={handleEditorChange} 
+              // onChange={handleEditorChange} 
               placeholder="Question Description..."
+              type="text" 
+              ref={questionDescriptionDom}
             />
           </div>
           <button type='submit' className={classes.publicQuestion_button_wrapper}>Post Your Question</button>
@@ -77,6 +99,5 @@ function AskQuestions() {
     </section>
   );
 }
-
 
 export default AskQuestions;
