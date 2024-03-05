@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState, useEffect } from 'react';
 import classes from './AskQuestions.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
@@ -10,18 +10,30 @@ import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import axios from '../../API/axiosConfig.js';
 
 function AskQuestions() {
-  const [editorContent, setEditorContent] = useState('');
-  const { questions, setQuestions } = useContext(AppState);
-  const navigate = useNavigate();
+  const { setQuestions } = useContext(AppState);
   const questionDom = useRef(null);
   const questionDescriptionDom = useRef(null);
+  const [editorContent, setEditorContent] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
+
+  async function fetchQuestions() {
+    try {
+      const response = await axios.get('/questions/all-questions');
+      setQuestions(response.data.questions);
+      console.log("Questions:", response.data.questions);
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+    }
+  }
 
   async function postQuestionSubmit(e) {
     e.preventDefault();
     const questionValue = questionDom.current.value;
     const questionDescriptionValue = questionDescriptionDom.current.value;
-
-    console.log(questionValue)
 
     if (!questionValue) {
       alert("Please provide your question");
@@ -42,14 +54,17 @@ function AskQuestions() {
           },
         }
       );
-      console.log(response);
-      console.log("Response", response.data);
+
+      console.log(response.config);
+      console.log("Response", response);
 
       const responseData = response.data;
 
       if (responseData) {
         alert("Question posted successfully.");
-        
+
+        // No need to log previous questions as it's not defined here
+
         setQuestions(prevQuestions => [...prevQuestions, responseData]);
         navigate('/');
       } else {
@@ -61,9 +76,6 @@ function AskQuestions() {
       alert("Failed to post question. Please try again later.");
     }
   }
-  
-  
-  
 
   return (
     <section>
@@ -84,11 +96,11 @@ function AskQuestions() {
         <form onSubmit={postQuestionSubmit}>
           <input type="text" placeholder='Question Title' ref={questionDom} />
           <div className={classes.reactQuill_wrapper}>
-            <ReactQuill 
-              value={editorContent} 
-              // onChange={handleEditorChange} 
+            <ReactQuill
+              value={editorContent}
+              onChange={setEditorContent}
               placeholder="Question Description..."
-              type="text" 
+              type="text"
               ref={questionDescriptionDom}
             />
           </div>

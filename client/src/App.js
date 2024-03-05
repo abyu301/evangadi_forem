@@ -11,14 +11,12 @@ import './App.css';
 export const AppState = createContext();
 
 function App() {
-  // Define user, questions, and setQuestions states
   const [user, setUser] = useState({});
-  const [questions, setQuestions] = useState([]); // Initialize questions as an empty array
-
-  const token = localStorage.getItem('token');
+  const [question, setQuestions] = useState([]);
   const navigate = useNavigate();
 
   async function fetchData() {
+    const token = localStorage.getItem('token');
     try {
       const [userData, questionsData] = await Promise.all([
         axios.get('/users/check', {
@@ -32,24 +30,35 @@ function App() {
           },
         }),
       ]);
-
+  
       setUser(userData.data);
       setQuestions(questionsData.data);
+      // Store data in localStorage
+      localStorage.setItem('userData', JSON.stringify(userData.data));
+      localStorage.setItem('questionsData', JSON.stringify(questionsData.data));
     } catch (error) {
-      console.error(error.response);
-      navigate('/login');
+      console.error(error);
+      navigate('/');
     }
   }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    // Check if data exists in localStorage and fetch if not
+    const userData = localStorage.getItem('userData');
+    const questionsData = localStorage.getItem('questionsData');
+    if (!userData || !questionsData) {
+      fetchData();
+    } else {
+      setUser(JSON.parse(userData));
+      setQuestions(JSON.parse(questionsData));
+    }
+  }, [question]); 
 
   console.log(user, 'user123');
-  console.log(questions, 'questions123');
+  console.log(question, 'questions123');
 
   return (
-    <AppState.Provider value={{ user, setUser, questions, setQuestions }}>
+    <AppState.Provider value={{ user, setUser, question, setQuestions }}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<SignUpPage />} />

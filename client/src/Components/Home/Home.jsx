@@ -7,10 +7,9 @@ import Header from '../../pages/Header/Header';
 import Footer from '../../pages/Footer/Footer';
 
 function Home() {
-  const { user, questions } = useContext(AppState);
+  const { user, question } = useContext(AppState);
   const [firstName, setFirstName] = useState('');
   const [userQuestions, setUserQuestions] = useState([]);
-
 
   useEffect(() => {
     if (user) {
@@ -19,10 +18,10 @@ function Home() {
   }, [user]);
 
   useEffect(() => {
-    if (questions) {
-      setUserQuestions(questions);
+    if (question) {
+      setUserQuestions(question);
     }
-  }, [questions]);
+  }, [question]);
 
   useEffect(() => {
     console.log("userQuestions:", userQuestions);
@@ -52,21 +51,26 @@ function Home() {
           </div>
         </div>
 
-        <div>
-          <h2>Users</h2>
-          <div>Name: {user?.firstname}</div>
-          <div>Email: {user?.email}</div>
-        </div>
+        {user && (
+          <div>
+            <h2>Users</h2>
+            <div>Name: {user.firstname}</div>
+            <div>Email: {user.email}</div>
+          </div>
+        )}
 
-        <div>
-          <h2>Questions</h2>
-          {userQuestions.map((question) => (
-            <div key={question.questionid}>
-              <h3>{question.question}</h3>
-              <p>{question.questiondescription}</p>
-            </div>
-          ))}
-        </div>
+{userQuestions.length > 0 && (
+  <div>
+    <h2>Questions</h2>
+    {userQuestions.map((question, index) => (
+      <div key={index}>
+        <h3>Question: {question.question ? question.question : 'No message'}</h3>
+        <p>Description: {question.msg}</p>
+      </div>
+    ))}
+  </div>
+)}
+
       </div>
 
       <div>

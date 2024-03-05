@@ -21,11 +21,9 @@ async function postQuestion(req, res) {
   }
 }
 
-async function getAllQuestions(req, res) {
+const getAllQuestions = async (req, res) => {
   try {
-    const questions = await dbConnection.query("SELECT * FROM questions JOIN users ON questions.usersid = users.userid ORDER BY questionid DESC");
-    console.log(questions[0])
-
+    const questions = await dbConnection.query("SELECT * FROM questions ORDER BY questionid DESC");
     res.status(StatusCodes.OK).json({ 
       total: questions[0].length,
       questions: questions[0],
@@ -35,6 +33,7 @@ async function getAllQuestions(req, res) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: "Something went wrong while fetching questions" });
   }
 }
+
 
 
 const singleQuestion = async (req, res) => {
