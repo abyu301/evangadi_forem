@@ -13,6 +13,7 @@ export const AppState = createContext();
 function App() {
   const [user, setUser] = useState({});
   const [question, setQuestions] = useState([]);
+  const [questionResponseConfig, setQuestionResponseConfig] = useState(null); // Add this state
   const navigate = useNavigate();
 
   async function fetchData() {
@@ -24,7 +25,7 @@ function App() {
             Authorization: 'Bearer ' + token,
           },
         }),
-        axios.get('/questions', {
+        axios.get('/questions/all-questions', {
           headers: {
             Authorization: 'Bearer ' + token,
           },
@@ -35,10 +36,10 @@ function App() {
       setQuestions(questionsData.data);
       // Store data in localStorage
       localStorage.setItem('userData', JSON.stringify(userData.data));
-      localStorage.setItem('questionsData', JSON.stringify(questionsData.data));
+      localStorage.setItem('questionsData', JSON.stringify(question));
+      setQuestionResponseConfig(questionsData.config); // Store the response config
     } catch (error) {
-      console.error(error);
-      navigate('/');
+      console.error(error.response);
     }
   }
 
@@ -52,13 +53,13 @@ function App() {
       setUser(JSON.parse(userData));
       setQuestions(JSON.parse(questionsData));
     }
-  }, [question]); 
+  }, []); 
 
   console.log(user, 'user123');
   console.log(question, 'questions123');
 
   return (
-    <AppState.Provider value={{ user, setUser, question, setQuestions }}>
+    <AppState.Provider value={{ user, setUser, question, setQuestions, questionResponseConfig }}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<SignUpPage />} />

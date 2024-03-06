@@ -2,12 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AppState } from '../../App';
 import classes from './Home.module.css';
 import { Link } from 'react-router-dom';
-
 import Header from '../../pages/Header/Header';
 import Footer from '../../pages/Footer/Footer';
 
 function Home() {
-  const { user, question } = useContext(AppState);
+  const { user, question, questionResponseConfig } = useContext(AppState);
   const [firstName, setFirstName] = useState('');
   const [userQuestions, setUserQuestions] = useState([]);
 
@@ -25,7 +24,8 @@ function Home() {
 
   useEffect(() => {
     console.log("userQuestions:", userQuestions);
-  }, [userQuestions]);
+    console.log("Question response config:", questionResponseConfig); // Access questionResponseConfig here
+  }, [userQuestions, questionResponseConfig]);
 
   return (
     <section>
@@ -59,17 +59,19 @@ function Home() {
           </div>
         )}
 
-{userQuestions.length > 0 && (
+{userQuestions.questions.length > 0 && (
   <div>
     <h2>Questions</h2>
-    {userQuestions.map((question, index) => (
+    {userQuestions.questions.map((question, index) => (
       <div key={index}>
         <h3>Question: {question.question ? question.question : 'No message'}</h3>
-        <p>Description: {question.msg}</p>
+        <p>Description: {question.questiondescription ? question.questiondescription : 'No description'}</p>
       </div>
     ))}
   </div>
 )}
+
+
 
       </div>
 

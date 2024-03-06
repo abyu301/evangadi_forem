@@ -6,6 +6,7 @@ async function postQuestion(req, res) {
 
   const usersid = req.user.usersid; 
 
+  console.log(usersid)
   if (!question) {
     return res.status(StatusCodes.BAD_REQUEST).json({ msg: "Missing required fields" });
   }

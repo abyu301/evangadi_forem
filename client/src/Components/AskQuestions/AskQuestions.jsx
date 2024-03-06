@@ -1,3 +1,4 @@
+
 import React, { useContext, useRef, useState, useEffect } from 'react';
 import classes from './AskQuestions.module.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -43,7 +44,7 @@ function AskQuestions() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        'questions/add-questions',
+        'questions/add-questions', 
         {
           question: questionValue,
           questionDescription: questionDescriptionValue,
@@ -58,14 +59,13 @@ function AskQuestions() {
       console.log(response.config);
       console.log("Response", response);
 
-      const responseData = response.data;
+      const responseData = response.config.data;
 
       if (responseData) {
         alert("Question posted successfully.");
 
-        // No need to log previous questions as it's not defined here
-
         setQuestions(prevQuestions => [...prevQuestions, responseData]);
+
         navigate('/');
       } else {
         console.error("Response data is undefined", response);
@@ -73,7 +73,7 @@ function AskQuestions() {
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to post question. Please try again later.");
+      alert("Failed to post question.** Please try again later.");
     }
   }
 
