@@ -1,4 +1,3 @@
-
 import React, { useContext, useRef, useState, useEffect } from 'react';
 import classes from './AskQuestions.module.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -64,7 +63,8 @@ function AskQuestions() {
       if (responseData) {
         alert("Question posted successfully.");
 
-        setQuestions(prevQuestions => [...prevQuestions, responseData]);
+        // Don't need to refresh here, it will refresh when navigating back to the home page
+        // setQuestions(prevQuestions => [...prevQuestions, responseData]);
 
         navigate('/');
       } else {

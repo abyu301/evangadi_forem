@@ -53,3 +53,13 @@
     border: 4px solid rgb(238,240,244);
     border-top: 6px;
 }
+.opposite {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    margin-right: 30px;
+}
+.opposite:hover {
+    cursor: pointer;
+    color: rgb(254,131,3);
+}

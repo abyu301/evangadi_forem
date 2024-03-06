@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import SignUpPage from './Components/SignUpPage/SignUpPage';
 import SignInPage from './Components/SignInPage/SignInPage';
 import AskQuestions from './Components/AskQuestions/AskQuestions';
+import Answer from './Components/Answer/Answer';
 import Home from './Components/Home/Home';
 import axios from './API/axiosConfig';
 import { createContext } from 'react';
@@ -60,10 +61,11 @@ function App() {
   return (
     <AppState.Provider value={{ user, setUser, question, setQuestions, questionResponseConfig }}>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<SignUpPage />} />
-        <Route path="/register" element={<SignInPage />} />
-        <Route path="/ask-questions" element={<AskQuestions />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<SignUpPage />} />
+          <Route path="/register" element={<SignInPage />} />
+          <Route path="/ask-questions" element={<AskQuestions />} />
+          <Route path="/:questionid/answers" element={<Answer />} />
       </Routes>
     </AppState.Provider>
   );
