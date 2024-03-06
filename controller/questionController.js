@@ -5,6 +5,9 @@ async function postQuestion(req, res) {
   const { question, questiondescription, questionCodeBlock, tags } = req.body;
 
   const usersid = req.user.usersid; 
+  const username = req.user.username;
+
+  console.log(username);
 
   console.log(usersid)
   if (!question) {
@@ -13,7 +16,7 @@ async function postQuestion(req, res) {
 
   try {
     await dbConnection.query("INSERT INTO questions (question, questiondescription, questionCodeBlock, tags, usersid) VALUES (?, ?, ?, ?, ?)", [
-      question, questiondescription, questionCodeBlock, tags, usersid
+      question, questiondescription, questionCodeBlock, tags, usersid, username
     ]);
     return res.status(StatusCodes.CREATED).json({ msg: "Question posted successfully" });
   } catch (error) {

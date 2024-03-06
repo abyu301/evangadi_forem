@@ -6,7 +6,6 @@ import AskQuestions from './Components/AskQuestions/AskQuestions';
 import Home from './Components/Home/Home';
 import axios from './API/axiosConfig';
 import { createContext } from 'react';
-import './App.css';
 
 export const AppState = createContext();
 
