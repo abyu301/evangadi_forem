@@ -11,7 +11,7 @@ import defaultUserImage from '../assets/user.png';
 function Answer() {
     const { questionid } = useParams(); 
     const [question, setQuestion] = useState(null); 
-    const [answers, setAnswers] = useState([]); // State to hold answers
+    const [answers, setAnswers] = useState([]); 
     const navigate = useNavigate();
     const [editorContent, setEditorContent] = useState('');
 

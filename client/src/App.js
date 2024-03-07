@@ -65,8 +65,7 @@ function App() {
         <Route path="/login" element={<SignUpPage />} />
         <Route path="/register" element={<SignInPage />} />
         <Route path="/ask-questions" element={<AskQuestions />} />
-        <Route path="/answers/:questionid" element={<Answer />} /> {/* Define the route for answers */}
-        {/* <Route path="/question/:questionid" element={<Answer />} /> Define the route for questions */}
+        <Route path="/answers/:questionid" element={<Answer />} />
       </Routes>
     </AppState.Provider>
   
