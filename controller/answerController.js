@@ -33,17 +33,28 @@ async function postAnswer(req, res) {
 
 
 async function getAnswerForQuestion(req, res) {
+    const { questionid } = req.params; 
     try {
-        const answers = await dbConnection.query("SELECT * FROM answertable ORDER BY answerid DESC");
+        const answers = await dbConnection.query(`
+            SELECT a.*, u.username AS username
+            FROM answertable a
+            INNER JOIN users u ON a.usersid = u.usersid
+            WHERE a.questionid = ?
+            ORDER BY a.answerid DESC
+        `, [questionid]);
+    
         res.status(StatusCodes.OK).json({ 
-          total: answers[0].length,
-          answers: answers[0],
+            total: answers[0].length,
+            answers: answers[0],
         });
     } catch (error) {
         console.error(error.message);
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: "Something went wrong while fetching answers" });
     }
+    
+
 }
+
 
 // const postAnswer = async (req, res) => {
 //     const questionId = req.params.questionid;

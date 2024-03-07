@@ -27,7 +27,12 @@ async function postQuestion(req, res) {
 
 const getAllQuestions = async (req, res) => {
   try {
-    const questions = await dbConnection.query("SELECT * FROM questions ORDER BY questionid DESC");
+    const questions = await dbConnection.query(`
+      SELECT q.*, u.firstname AS username
+      FROM questions q
+      JOIN users u ON q.usersid = u.usersid
+      ORDER BY q.questionid DESC
+    `);
     res.status(StatusCodes.OK).json({ 
       total: questions[0].length,
       questions: questions[0],
@@ -36,6 +41,7 @@ const getAllQuestions = async (req, res) => {
     console.error(error.message);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: "Something went wrong while fetching questions" });
   }
+  
 }
 
 
@@ -44,13 +50,18 @@ const singleQuestion = async (req, res) => {
   const questionid = req.params.questionid;
 
   try {
-    let question = await dbConnection.query(`SELECT * FROM questions WHERE questionid = '${questionid}'`);
-    console.log(question[0]);
-    res.status(StatusCodes.OK).json(question[0][0]); 
-  } catch (error) {
+    let question = await dbConnection.query(`
+        SELECT q.*, u.firstname AS username
+        FROM questions q
+        JOIN users u ON q.usersid = u.usersid
+        WHERE q.questionid = '${questionid}'
+    `);
+    res.status(StatusCodes.OK).json(question[0][0]);
+} catch (error) {
     console.error(error);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: "Something went wrong while fetching the question" });
-  }
+}
+
 }
 
 

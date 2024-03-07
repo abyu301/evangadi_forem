@@ -94,3 +94,7 @@
 .publicQuestion_wrapper a:hover {
     color: rgb(254,131,3);
 }
+.single_answer_wrapper {
+    margin-left: 50px;
+    font-size: large;
+}

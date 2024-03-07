@@ -33,7 +33,7 @@ function AskQuestions() {
   async function postQuestionSubmit(e) {
     e.preventDefault();
 
-    // Check if the refs are initialized
+    
     if (!questionDom.current) {
         console.error('Question input ref is not initialized.');
         return;
@@ -52,7 +52,7 @@ function AskQuestions() {
             'questions/add-questions', 
             {
                 question: questionValue,
-                questionDescription: editorContent, // Get editor content from state
+                questionDescription: editorContent, 
             },
             {
                 headers: {

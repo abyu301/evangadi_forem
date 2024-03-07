@@ -67,7 +67,7 @@ function Home() {
                   height="90"
                 />
               </div>
-              <div>User ID: {question.usersid ? question.usersid : 'Unknown'}</div>
+              <div> {question.username ? question.username : 'Unknown'}</div>
               <div className={classes.singleQuestion_wrapper}>
                 <Link to={`/answers/${question.questionid}`}>
                   <h3>
