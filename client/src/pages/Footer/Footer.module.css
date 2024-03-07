@@ -1,11 +1,10 @@
-/* footer */
 .footer__wrapper {
     display: flex;
     justify-content: center;
     margin: 0 auto;
     padding:30px 0;
     background-color: rgb(59,69,90);
-    height: 170px;
+    height: 220px;
 }
 .footer__wrapper div {
     flex: 1 1 33.33%;
@@ -36,12 +35,12 @@
     margin-right: 20px;
 }
 .icon_circle {
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     border: 2px solid white;
     text-align: center;
-    line-height: 50px;
+    line-height: 40px;
 }
 .icon_circle:hover {
     background-color: aliceblue;

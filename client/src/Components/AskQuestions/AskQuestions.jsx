@@ -32,50 +32,55 @@ function AskQuestions() {
 
   async function postQuestionSubmit(e) {
     e.preventDefault();
+
+    // Check if the refs are initialized
+    if (!questionDom.current) {
+        console.error('Question input ref is not initialized.');
+        return;
+    }
+
     const questionValue = questionDom.current.value;
-    const questionDescriptionValue = questionDescriptionDom.current.value;
 
     if (!questionValue) {
-      alert("Please provide your question");
-      return;
+        alert("Please provide your question");
+        return;
     }
 
     try {
-      const token = localStorage.getItem("token");
-      const response = await axios.post(
-        'questions/add-questions', 
-        {
-          question: questionValue,
-          questionDescription: questionDescriptionValue,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
+        const token = localStorage.getItem("token");
+        const response = await axios.post(
+            'questions/add-questions', 
+            {
+                question: questionValue,
+                questionDescription: editorContent, // Get editor content from state
+            },
+            {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            }
+        );
+
+        console.log(response.config);
+        console.log("Response", response);
+
+        const responseData = response.config.data;
+
+        if (responseData) {
+            alert("Question posted successfully.");
+
+            navigate('/');
+        } else {
+            console.error("Response data is undefined", response);
+            alert("Failed to post question. Please try again later.");
         }
-      );
-
-      console.log(response.config);
-      console.log("Response", response);
-
-      const responseData = response.config.data;
-
-      if (responseData) {
-        alert("Question posted successfully.");
-
-        // Don't need to refresh here, it will refresh when navigating back to the home page
-        // setQuestions(prevQuestions => [...prevQuestions, responseData]);
-
-        navigate('/');
-      } else {
-        console.error("Response data is undefined", response);
-        alert("Failed to post question. Please try again later.");
-      }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to post question.** Please try again later.");
+        console.error("Error:", error);
+        alert("Failed to post question. Please try again later.");
     }
-  }
+}
+
+
 
   return (
     <section>

@@ -63,3 +63,17 @@
     cursor: pointer;
     color: rgb(254,131,3);
 }
+
+.singleQuestion_wrapper {
+    margin: 1% 10%;
+    display: block;
+    text-align: center;
+}
+.singleQuestion_wrapper a{
+    color: rgb(64, 63, 63);
+    text-decoration: none;
+}
+.singleQuestion_wrapper span {
+    color: rgb(81,108,240);
+    margin-right: 40px;
+}

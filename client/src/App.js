@@ -61,13 +61,15 @@ function App() {
   return (
     <AppState.Provider value={{ user, setUser, question, setQuestions, questionResponseConfig }}>
       <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<SignUpPage />} />
-          <Route path="/register" element={<SignInPage />} />
-          <Route path="/ask-questions" element={<AskQuestions />} />
-          <Route path="/:questionid/answers" element={<Answer />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<SignUpPage />} />
+        <Route path="/register" element={<SignInPage />} />
+        <Route path="/ask-questions" element={<AskQuestions />} />
+        <Route path="/answers/:questionid" element={<Answer />} /> {/* Define the route for answers */}
+        {/* <Route path="/question/:questionid" element={<Answer />} /> Define the route for questions */}
       </Routes>
     </AppState.Provider>
+  
   );
 }
 

@@ -7,6 +7,7 @@
 }
 .header_manubar {
     display: flex;
+    /* padding-top: 20px; */
 }
 .header_wrapper_logo {
     margin-right: 20%;
@@ -14,6 +15,9 @@
 }
 .header_wrapper_logo img {
     max-width: 200px;
+}
+.header_middle_wrapper {
+    padding-top: 25px;
 }
 .header_middle_wrapper  ul{
     display: flex;
@@ -39,10 +43,11 @@
 }
 .header_signin_wrapper button {
     width: 170px;
-    height: 45px;
+    height: 40px;
     background-color: rgb(81,108,240);
     border-radius: 15px;
     border: 2px solid rgb(81,108,240);
+    padding-top: 5px;
     text-align: center;
 }
 .header_signin_wrapper button:hover {

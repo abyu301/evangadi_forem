@@ -37,13 +37,13 @@ function Home() {
     <section>
       <Header />
       <hr className={classes.hr} />
-
+  
       <div className={classes.home_body_wrapper}>
         <div className={classes.top_body_wrapper}>
           <div className={classes.ask_questions}>
             <button><Link to={"/ask-questions"}>Ask Questions</Link></button>
           </div>
-
+  
           <div className={classes.search_input}>
             <input
               type="search"
@@ -54,38 +54,42 @@ function Home() {
             <h2> Welcome: <span>{firstName}</span></h2>
           </div>
         </div>
-
+  
         {userQuestions.map((question, index) => (
-    <div key={index} className="card mb-3">
-        <div className="card-header d-flex align-items-center">
-            <div className="avatar me-2">
+          <div key={index} className="card mb-3">
+            <div className={`card-header d-flex align-items-center ${classes.questionData_wrapper}`}>
+              <div className="avatar me-2">
                 <img
-                    src={question.userPhoto || defaultUserImage}
-                    alt="User Avatar"
-                    className="rounded-circle"
-                    width="90"
-                    height="90"
+                  src={question.userPhoto || defaultUserImage}
+                  alt="User Avatar"
+                  className="rounded-circle"
+                  width="90"
+                  height="90"
                 />
+              </div>
+              <div>User ID: {question.usersid ? question.usersid : 'Unknown'}</div>
+              <div className={classes.singleQuestion_wrapper}>
+                <Link to={`/answers/${question.questionid}`}>
+                  <h3>
+                    <span>Question ?</span>
+                    <br />
+                    {question.question}
+                  </h3>
+                  <h5 className="card-title">
+                    <FaChevronRight className={classes.opposite} />
+                  </h5>
+                </Link>
+              </div>
             </div>
-            <div>User ID: {question.usersid ? question.usersid : 'Unknown'}</div>
-        </div>
-        <div className="card-body">
-            <hr />
-            <Link to={`/${question.questionid}/answers`}>
-                <h5 className="card-title">
-                    <FaChevronRight className={classes.opposite}/> {/* Next page icon */}
-                    Question: {question.question ? question.question : 'No message'}
-                </h5>
-            </Link>
-            <p className="card-text">Description: {question.questiondescription ? question.questiondescription : 'No description'}</p>
-        </div>
-    </div>
-))}
+          </div>
+        ))}
       </div>
-
+  
       <Footer />
     </section>
   );
+  
+  
 }
 
 export default Home;
