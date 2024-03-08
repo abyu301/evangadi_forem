@@ -34,7 +34,7 @@
 }
 .visibilityIcon {
     display: flex;
-    left: 90%; 
+    left: 80%; 
     top: -20px;
     transform: translateY(-50%);
 }

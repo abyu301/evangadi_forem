@@ -81,73 +81,65 @@ async function postAnswerSubmit(e) {
 }
 
 
-    return (
-        <section>
-            <Header />
-            <hr className={classes.hr} />
-            <div className={classes.home_body_wrapper}>
-                {question && (
-                    <div key={question.questionid} className="card mb-3">
+return (
+    <section>
+        <Header />
+        <hr className={classes.hr} />
+        <div className={classes.home_body_wrapper}>
+            {question && (
+                <div key={question.questionid} className="card mb-3">
+                    <div className={`card-header d-flex align-items-center ${classes.questionData_wrapper}`}>
+                        <div className={classes.singleQuestion_wrapper}>
+                            <h3><span>Question ?</span> {question.question}</h3>
+                        </div>
+                    </div>
+                    <div className={`card mb-3 ${classes.question_discription}`}>
+                        {question.questiondescription}
+                    </div>
+                </div>
+            )}
+            
+            {answers.map((answer, index) => (
+                <div key={index} className="card mb-3">
+                    <div className="card-body">
                         <div className={`card-header d-flex align-items-center ${classes.questionData_wrapper}`}>
                             <div className="avatar me-2">
                                 <img
                                     src={question.userPhoto || defaultUserImage}
                                     alt="User Avatar"
                                     className="rounded-circle"
-                                    width="90"
-                                    height="90"
-                                />
-                            </div>
-                            <div> {question.username ? question.username : 'Unknown'}</div>
-                        
-                            <div className={classes.singleQuestion_wrapper}>
-                                <h3><span>Question ?</span> {question.question}</h3>
-                            </div>
-                        </div>
-                        <div className="card mb-3">
-                            <h4> QuestionDisc: {question.questiondescription ? question.questiondescription : 'No message'}</h4>
-                        </div>
-                       
-                        {answers.map((answer, index) => (
-                            <div key={index} className="card mb-3">
-                                <div className="card-body">
-                                <div className={`card-header d-flex align-items-center ${classes.questionData_wrapper}`}>
-                            <div className="avatar me-2">
-                                <img
-                                    src={question.userPhoto || defaultUserImage}
-                                    alt="User Avatar"
-                                    className="rounded-circle"
-                                    width="90"
-                                    height="90"
+                                    width="60"
+                                    height="60"
                                 />
                             </div>
                             <div> {answer.username ? answer.username : 'Unknown'}</div>
                         </div>
-                            <div className={classes.single_answer_wrapper}>{answer.answer}</div>
-                                </div>
-                            </div>
-                        ))}
-                        
-                        <div className={classes.publicQuestion_wrapper}>
-                            <h2>Answer The Question</h2>
-                            <Link to={`/question/${questionid}`}><p>Go back to Question Page</p></Link>
-                            <form onSubmit={postAnswerSubmit}>
-                                <div className={classes.reactQuill_wrapper}>
-                                    <ReactQuill
-                                        value={editorContent}
-                                        onChange={setEditorContent}
-                                        placeholder="Answer the Question..."
-                                    />
-                                </div>
-                                <button type='submit' className={classes.publicQuestion_button_wrapper}>Post Your Answer</button>
-                            </form>
-                        </div>
+                        <div className={classes.single_answer_wrapper}>{answer.answer}</div>
                     </div>
-                )}
-            </div>
-            <Footer />
-        </section>
-    );
+                </div>
+            ))}
+            
+            {question && (
+                <div className={classes.publicQuestion_wrapper}>
+                    <h2>Answer The Question</h2>
+                    <Link to={`/question/${questionid}`}><p>Go back to Question Page</p></Link>
+                    <form onSubmit={postAnswerSubmit}>
+                        <div className={classes.reactQuill_wrapper}>
+                            <ReactQuill
+                                value={editorContent}
+                                onChange={setEditorContent}
+                                placeholder="Answer the Question..."
+                            />
+                        </div>
+                        <button type='submit' className={classes.publicQuestion_button_wrapper}>Post Your Answer</button>
+                    </form>
+                </div>
+            )}
+        </div>
+        <Footer />
+    </section>
+);
+
 }  
 
 export default Answer;

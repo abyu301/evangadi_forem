@@ -13,47 +13,44 @@ export const AppState = createContext();
 function App() {
   const [user, setUser] = useState({});
   const [question, setQuestions] = useState([]);
-  const [questionResponseConfig, setQuestionResponseConfig] = useState(null); // Add this state
+  const [questionResponseConfig, setQuestionResponseConfig] = useState(null); 
   const navigate = useNavigate();
 
-  async function fetchData() {
+  useEffect(() => {
     const token = localStorage.getItem('token');
+    if (!token) {
+      // If token does not exist, navigate to the login page
+      navigate('/login');
+    } else {
+      fetchData();
+    }
+  }, []); 
+
+  async function fetchData() {
     try {
       const [userData, questionsData] = await Promise.all([
         axios.get('/users/check', {
           headers: {
-            Authorization: 'Bearer ' + token,
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
           },
         }),
         axios.get('/questions/all-questions', {
           headers: {
-            Authorization: 'Bearer ' + token,
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
           },
         }),
       ]);
   
       setUser(userData.data);
       setQuestions(questionsData.data);
-      // Store data in localStorage
+     
       localStorage.setItem('userData', JSON.stringify(userData.data));
       localStorage.setItem('questionsData', JSON.stringify(question));
-      setQuestionResponseConfig(questionsData.config); // Store the response config
+      setQuestionResponseConfig(questionsData.config); 
     } catch (error) {
       console.error(error.response);
     }
   }
-
-  useEffect(() => {
-    // Check if data exists in localStorage and fetch if not
-    const userData = localStorage.getItem('userData');
-    const questionsData = localStorage.getItem('questionsData');
-    if (!userData || !questionsData) {
-      fetchData();
-    } else {
-      setUser(JSON.parse(userData));
-      setQuestions(JSON.parse(questionsData));
-    }
-  }, []); 
 
   console.log(user, 'user123');
   console.log(question, 'questions123');

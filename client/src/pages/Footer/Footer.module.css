@@ -54,6 +54,7 @@
 }
 .footer_usefullinks ul li{
     list-style: none;
+    padding-left: 10px;
 }
 .footer_usefullinks ul li a:hover {
     color: rgb(240, 246, 242);

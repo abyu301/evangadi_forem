@@ -48,6 +48,7 @@
 }
 .singleQuestion_wrapper span {
     color: rgb(81,108,240);
+    margin-right: 22px;
 }
 
 .publicQuestion_wrapper {
@@ -95,6 +96,16 @@
     color: rgb(254,131,3);
 }
 .single_answer_wrapper {
-    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+.question_discription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-size: large;
 }
