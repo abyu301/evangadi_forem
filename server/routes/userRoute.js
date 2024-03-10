@@ -4,6 +4,11 @@ const router = express.Router();
 // authentication middleware
 const authMiddleware = require("../middleware/authMiddleware");
 
+// // logout
+// router.get('/logout', (req, res) => {
+//     res.clearCookie("jwt-token");
+// })
+
 // user controllers
 const { register, login, checkUser } = require("../controller/userController");
 
