@@ -54,7 +54,7 @@
     background-color: rgb(254,131,3);
     border: 2px solid rgb(254,131,3);
 }
-.header_signin_wrapper button a{
+.header_signin_wrapper button p{
     color: white;
     text-decoration: none;
 }
@@ -111,19 +111,20 @@
     }
     .dropdown_content a {
         color: black;
-        padding: 12px 16px;
+        margin: 22px 36px;
         text-decoration: none;
         display: block;
     }
-    .dropdown_content a button {
+    .dropdown_content button {
         width: 170px;
         height: 40px;
         background-color: rgb(81,108,240);
         border-radius: 5px;
         border: 2px solid rgb(81,108,240);
         text-align: center;
+        margin: 0 36px;
     }
-    .dropdown_content a button:hover {
+    .dropdown_content button:hover {
         background-color: rgb(254,131,3);
         border: 2px solid rgb(254,131,3);
     }

@@ -122,7 +122,7 @@ return (
             {question && (
                 <div className={classes.publicQuestion_wrapper}>
                     <h2>Answer The Question</h2>
-                    <Link to={`/question/${questionid}`}><p>Go back to Question Page</p></Link>
+                    <Link to={`/`}><p>Go back to Question Page</p></Link>
                     <form onSubmit={postAnswerSubmit}>
                         <div className={classes.reactQuill_wrapper}>
                             <ReactQuill

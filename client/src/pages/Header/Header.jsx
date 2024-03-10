@@ -18,16 +18,16 @@ function Header() {
     };
 
     
-// Function to handle logout
+
 const handleLogout = () => {
     fetch('/users/logout')
         .then(response => {
             if (response.ok) {
-                // Clear user data from localStorage
+                
                 localStorage.removeItem('userData');
-                // Clear authentication token from localStorage
+                
                 localStorage.removeItem('token');
-                // Navigate to the login page
+                
                 navigate('/login');
             }
         })

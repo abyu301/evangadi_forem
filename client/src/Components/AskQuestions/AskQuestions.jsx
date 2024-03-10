@@ -13,7 +13,7 @@ function AskQuestions() {
   const { setQuestions } = useContext(AppState);
   const questionDom = useRef(null);
   const questionDescriptionDom = useRef(null);
-  const [editorContent, setEditorContent] = useState('');
+  // const [editorContent, setEditorContent] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,6 +40,7 @@ function AskQuestions() {
     }
 
     const questionValue = questionDom.current.value;
+    const questionDescriptionValue = questionDescriptionDom.current.value;
 
     if (!questionValue) {
         alert("Please provide your question");
@@ -52,7 +53,7 @@ function AskQuestions() {
             'questions/add-questions', 
             {
                 question: questionValue,
-                questionDescription: editorContent, 
+                questionDescription: questionDescriptionValue, 
             },
             {
                 headers: {
@@ -99,11 +100,14 @@ function AskQuestions() {
         <h2>Ask a public question</h2>
         <Link to={"/"}><p>Go to Question Page</p></Link>
         <form onSubmit={postQuestionSubmit}>
-          <input type="text" placeholder='Question Title' ref={questionDom} />
+          <input 
+            type="text" 
+            placeholder='Question Title' 
+            ref={questionDom} />
           <div className={classes.reactQuill_wrapper}>
             <ReactQuill
-              value={editorContent}
-              onChange={setEditorContent}
+              // value={editorContent}
+              // onChange={setEditorContent}
               placeholder="Question Description..."
               type="text"
               ref={questionDescriptionDom}
