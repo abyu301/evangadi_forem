@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import classes from './Answer.module.css';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Footer from '../../pages/Footer/Footer';
@@ -14,31 +14,31 @@ function Answer() {
     const [answers, setAnswers] = useState([]); 
     const [editorContent, setEditorContent] = useState('');
 
-    useEffect(() => {
-        fetchQuestion(); 
-    }, [fetchQuestion]);
-
-    useEffect(() => {
-        fetchAnswers(); 
-    }, [fetchAnswers, questionid]);
-
-    async function fetchQuestion() {
+    const fetchQuestion = useCallback(async () => {
         try {
             const response = await axios.get(`/questions/${questionid}`);
             setQuestion(response.data); 
         } catch (error) {
             console.error("Error fetching question details:", error);
         }
-    }
+    }, [questionid]);
 
-    async function fetchAnswers() {
+    const fetchAnswers = useCallback(async () => {
         try {
             const response = await axios.get(`/answers/${questionid}`);
             setAnswers(response.data.answers); 
         } catch (error) {
             console.error("Error fetching answers:", error);
         }
-    }
+    }, [questionid]);
+
+    useEffect(() => {
+        fetchAnswers(); 
+    }, [fetchAnswers]);
+
+    useEffect(() => {
+        fetchQuestion();  
+    }, [fetchQuestion]);
 
     async function postAnswerSubmit(e) {
         e.preventDefault();
@@ -120,7 +120,6 @@ function Answer() {
                 {question && (
                     <div className={classes.publicQuestion_wrapper}>
                         <h2>Answer The Question</h2>
-                        <Link to={`/`}><p>Go back to Question Page</p></Link>
                         <form onSubmit={postAnswerSubmit}>
                             <div className={classes.reactQuill_wrapper}>
                                 <ReactQuill
